@@ -1,0 +1,31 @@
+{
+  "name": "mgoAdmin",
+  "version": "0.0.1",
+  "homepage": "https://github.com/xuender/mgoAdmin",
+  "authors": [
+    "徐晨阳 <xuender@gmail.com>"
+  ],
+  "description": "mgoAdmin is a free software tool written in GO lang, intended to handle the administration of MongoDB over the Web.",
+  "main": "main.go",
+  "keywords": [
+    "mgoAdmin"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "angular": "~1.2.*",
+    "bootstrap": "~3.2.0",
+    "angular-bootstrap": "~0.12.*",
+    "angular-local-storage": "~0.0.5",
+    "font-awesome": "~4.3.0",
+    "angular-route": "~1.2.*",
+    "ng-table": "~0.3.3",
+    "angular-i18n": "~1.2.*"
+  }
+}
+

@@ -1,0 +1,39 @@
+{
+  "name": "mgoAdmin",
+  "version": "0.0.1",
+  "description": "mgoAdmin is a free software tool written in GO lang, intended to handle the administration of MongoDB over the Web.",
+  "main": "main.go",
+  "scripts": {
+    "test": "grunt travis --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/xuender/mgoAdmin.git"
+  },
+  "keywords": [
+    "mgoAdmin"
+  ],
+  "author": "ender",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xuender/mgoAdmin/issues"
+  },
+  "homepage": "https://github.com/xuender/mgoAdmin",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-bumpx": "~0.1.5",
+    "grunt-contrib-uglify": "~0.6.*",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-coffeelint": "~0.0.7",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-cssmin": "~0.10.0",
+    "karma-phantomjs-launcher": "~0.1.1",
+    "grunt-karma": "~0.6.2"
+  },
+  "dependencies": {
+    "grunt-contrib-cssmin": "~0.10.0"
+  }
+}
+

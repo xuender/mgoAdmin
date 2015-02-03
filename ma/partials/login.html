@@ -1,0 +1,34 @@
+<div class="modal-header">
+  <h4 class="modal-title">MongoDB user login</h4>
+</div><!-- modal-header -->
+<div class="modal-body">
+  <form name="form">
+    <div class="row">
+      <div class="form-group col-xs-6" 
+      ng-class="{'has-error': form.n.$error.required}">
+        <label class="control-label col-xs-3" for="i_ip">db address</label>
+        <div class="col-xs-6">
+          <input required name="ip"
+          type="text" class="form-control" id="i_ip" placeholder="db address"/>
+        </div><!-- 6 -->
+        <span class="help-block col-xs-3" ng-show="form.ip.$error.required">不能为空</span>
+      </div><!-- form-group -->
+    </div><!-- row -->
+    <div class="row">
+      <div class="form-group col-xs-6" 
+      ng-class="{'has-error': form.n.$error.required}">
+        <label class="control-label col-xs-3" for="i_name">db name</label>
+        <div class="col-xs-6">
+          <input required name="name"
+          type="text" class="form-control" id="i_name" placeholder="db name"/>
+        </div><!-- 6 -->
+        <span class="help-block col-xs-3" ng-show="form.name.$error.required">不能为空</span>
+      </div><!-- form-group -->
+    </div><!-- row -->
+  </form>
+</div><!-- modal-body -->
+<div class="modal-footer">
+  <button ng-click="ok(form.$valid)" ng-disabled="!form.$valid"
+  class="btn btn-primary">确定</button>
+  <button class="btn btn-warning" ng-click="cancel()">取消</button>
+</div><!-- modal-footer -->
