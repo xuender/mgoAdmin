@@ -1,0 +1,13 @@
+<h1>Collection</h1>
+
+db: {{ db }}
+collection: {{ collection }}
+<table ng-table="tableParams" show-filter="true"
+  class="table table-hover table-condensed">
+  <tr ng-repeat="d in $data">
+    <td ng-repeat="n in names">
+      {{ d[n] }}
+    </td>
+  </tr>
+</table>
+

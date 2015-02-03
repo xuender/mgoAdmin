@@ -36,12 +36,6 @@ func DbClose() {
 	dbSession.Close()
 }
 
-func UseDb(params martini.Params, r render.Render){
-  dbDB = dbSession.DB(params["db"])
-  ret := Msg{}
-  ret.Ok = true
-  r.JSON(200, ret)
-}
 func DatabaseNames(r render.Render){
   ret := Msg{}
   ret.Ok = dbSession != nil
@@ -58,10 +52,11 @@ func DatabaseNames(r render.Render){
   }
   r.JSON(200, ret)
 }
-func CollectionNames(r render.Render) {
+func CollectionNames(params martini.Params, r render.Render) {
   ret := Msg{}
-  ret.Ok = dbDB != nil
+  ret.Ok = dbSession != nil
   if ret.Ok{
+    dbDB = dbSession.DB(params["db"])
     names , err := dbDB.CollectionNames()
     if err == nil{
       ret.Data = names
@@ -71,6 +66,18 @@ func CollectionNames(r render.Render) {
     }
   }else{
     ret.Err = "db is not connect"
+  }
+  r.JSON(200, ret)
+}
+func CollectionQuery(query Query, r render.Render) {
+  ret := Msg{}
+  dbDB = dbSession.DB("family")
+  err := query.Run(dbDB)
+  ret.Ok = err == nil
+  if ret.Ok{
+    ret.Data = query
+  }else{
+    ret.Err = err.Error()
   }
   r.JSON(200, ret)
 }

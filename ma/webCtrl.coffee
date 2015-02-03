@@ -51,6 +51,7 @@ WebCtrl = ($scope, $log, $http, $modal, lss)->
     )
   $scope.db = 'test'
   $scope.database = []
+  $scope.collection = []
   $scope.readDb = ->
     $http.get('/database').success((msg)->
       $log.debug msg
@@ -59,11 +60,14 @@ WebCtrl = ($scope, $log, $http, $modal, lss)->
     )
   $scope.$watch('db', (n, o)->
     $log.debug n
-    $http.put("/use/#{ n }").success((msg)->
+    $http.get("/collection/#{ n }").success((msg)->
       $log.debug msg
-      $scope.readDb()
+      if msg.ok
+        $scope.collection= msg.data
+
     )
   )
+  $scope.readDb()
   #if $scope.isLogin
   #  $http.get('/login').success((data)->
   #    $log.debug(data)

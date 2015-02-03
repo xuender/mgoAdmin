@@ -187,6 +187,8 @@ module.exports = (grunt)->
         files:
           'public/js/index.min.js': [
             'ma/index.coffee'
+            'ma/aboutCtrl.coffee'
+            'ma/collectionCtrl.coffee'
             'ma/webCtrl.coffee'
           ]
     uglify:
