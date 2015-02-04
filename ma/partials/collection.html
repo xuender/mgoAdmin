@@ -8,6 +8,14 @@ collection: {{ collection }}
     <td ng-repeat="n in names">
       {{ d[n] }}
     </td>
+    <td>
+      <button class="btn btn-xs" ng-click="edit(d)">
+        <i class="fa fa-pencil-square-o"></i>
+      </button>
+      <button class="btn btn-xs">
+        <i class="fa fa-times"></i>
+      </button>
+    </td>
   </tr>
 </table>
 

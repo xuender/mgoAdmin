@@ -7,9 +7,6 @@ import (
   "github.com/martini-contrib/render"
 )
 
-//const (
-//  MGO = iota
-//)
 var dbSession *mgo.Session
 var dbDB *mgo.Database
 

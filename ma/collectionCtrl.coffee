@@ -5,7 +5,7 @@ Copyright (C) 2015 ender xu <xuender@gmail.com>
 Distributed under terms of the MIT license.
 ###
 
-CollectionCtrl = ($scope, $log, $http, $routeParams, ngTableParams, $filter)->
+CollectionCtrl = ($scope, $log, $http, $modal, $routeParams, ngTableParams, $filter)->
   $log.debug 'collection'
   $scope.db = $routeParams.db
   $scope.collection = $routeParams.collection
@@ -17,13 +17,28 @@ CollectionCtrl = ($scope, $log, $http, $routeParams, ngTableParams, $filter)->
     for na in n
       $scope.$$childHead.$columns.push(
         title: ->
-          $log.debug $scope.$$childHead.$columns
           na
         sortable: ->
           na
         id: i++
       )
   ,true)
+  $scope.edit = (data)->
+    i = $modal.open(
+      templateUrl: '/partials/edit.html'
+      controller: 'EditCtrl'
+      backdrop: 'static'
+      keyboard: true
+      size: 'lg'
+      resolve:
+        data: ->
+          angular.copy data
+    )
+    i.result.then((data)->
+      $log.debug data
+    ,->
+      $log.debug 'cancel'
+    )
   $scope.tableParams = new ngTableParams(
     page: 1
     count: 10
@@ -52,6 +67,7 @@ CollectionCtrl.$inject = [
   '$scope'
   '$log'
   '$http'
+  '$modal'
   '$routeParams'
   'ngTableParams'
   '$filter'
