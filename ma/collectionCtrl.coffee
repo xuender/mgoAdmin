@@ -36,6 +36,16 @@ CollectionCtrl = ($scope, $log, $http, $modal, $routeParams, ngTableParams, $fil
     )
     i.result.then((data)->
       $log.debug data
+      $http.put("/collection/#{ $scope.db }/#{ $scope.collection }",
+        ok: true
+        data: data
+      ).success((msg)->
+        $log.debug msg
+        if msg.ok
+          $scope.tableParams.reload()
+        else
+          alert(msg.err)
+      )
     ,->
       $log.debug 'cancel'
     )

@@ -11,6 +11,8 @@ func Path(m *martini.ClassicMartini, p string) {
   })
   m.Get("/database", DatabaseNames)
   m.Get("/collection/:db", CollectionNames)
-  m.Post("/collection",binding.Bind(Query{}), CollectionQuery)
+  m.Post("/collection", binding.Bind(Query{}), CollectionQuery)
+  m.Put("/collection/:db/:collection",
+    binding.Bind(Msg{}), CollectionUpdate)
 }
 

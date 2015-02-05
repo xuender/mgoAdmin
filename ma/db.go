@@ -3,6 +3,7 @@ package ma
 import (
 	"log"
 	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 	"github.com/go-martini/martini"
   "github.com/martini-contrib/render"
 )
@@ -77,5 +78,22 @@ func CollectionQuery(query Query, r render.Render) {
     ret.Err = err.Error()
   }
   r.JSON(200, ret)
+}
+func CollectionUpdate(params martini.Params, msg Msg, r render.Render) {
+  log.Println(msg)
+  dbDB = dbSession.DB(params["db"])
+  c := dbDB.C(params["collection"])
+  data := msg.Data.(map[string]interface{})
+  id := bson.ObjectIdHex(data["_id"].(string))
+  delete(data,"_id")
+  log.Println(id)
+  err := c.UpdateId(id, data)
+  log.Println(err)
+  msg.Ok = err == nil
+  if !msg.Ok{
+    msg.Err = err.Error()
+  }
+  msg.Data = nil
+  r.JSON(200, msg)
 }
 
