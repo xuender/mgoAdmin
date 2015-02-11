@@ -9,27 +9,23 @@ import (
 )
 
 var dbSession *mgo.Session
-var dbDB *mgo.Database
 
 // 打开数据库
-func DbOpen(ip, name string) (err error) {
+func DbOpen(ip string) (err error) {
 	dbSession, err = mgo.Dial(ip)
 	if err != nil {
 		log.Fatal("数据库连接失败")
 		panic("数据库连接失败")
 	}
 	dbSession.SetMode(mgo.Monotonic, true)
-	dbDB = dbSession.DB(name)
-  names, _ := dbDB.CollectionNames()
-  log.Println(names)
 	return
 }
 
 func init(){
-  //TODO
-  DbOpen("127.0.0.1", "test")
+  config := ConfigLoad()
+  DbOpen(config.Address)
 }
-// 关闭数据库
+
 func DbClose() {
 	dbSession.Close()
 }
@@ -54,7 +50,7 @@ func CollectionNames(params martini.Params, r render.Render) {
   ret := Msg{}
   ret.Ok = dbSession != nil
   if ret.Ok{
-    dbDB = dbSession.DB(params["db"])
+    dbDB := dbSession.DB(params["db"])
     names , err := dbDB.CollectionNames()
     if err == nil{
       ret.Data = names
@@ -67,9 +63,10 @@ func CollectionNames(params martini.Params, r render.Render) {
   }
   r.JSON(200, ret)
 }
-func CollectionQuery(query Query, r render.Render) {
+
+func CollectionQuery(params martini.Params, query Query, r render.Render) {
   ret := Msg{}
-  dbDB = dbSession.DB("family")
+  dbDB := dbSession.DB(params["db"])
   err := query.Run(dbDB)
   ret.Ok = err == nil
   if ret.Ok{
@@ -79,9 +76,10 @@ func CollectionQuery(query Query, r render.Render) {
   }
   r.JSON(200, ret)
 }
+
 func CollectionUpdate(params martini.Params, msg Msg, r render.Render) {
   log.Println(msg)
-  dbDB = dbSession.DB(params["db"])
+  dbDB := dbSession.DB(params["db"])
   c := dbDB.C(params["collection"])
   data := msg.Data.(map[string]interface{})
   id := bson.ObjectIdHex(data["_id"].(string))

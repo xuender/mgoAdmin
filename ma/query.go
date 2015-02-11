@@ -25,7 +25,7 @@ func readName(i interface{}) []string {
 }
 func (q *Query) Run(db *mgo.Database) error {
 	m := bson.M{}
-  qu := dbDB.C(q.Collection).Find(m)
+  qu := db.C(q.Collection).Find(m)
   count, err := qu.Count()
   if err != nil{
     return err
