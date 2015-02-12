@@ -1,6 +1,9 @@
 package ma
 
 import (
+  "log"
+  "sort"
+	"reflect"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
@@ -20,7 +23,13 @@ type Query struct {
 }
 
 func readName(i interface{}) []string {
-  ret := []string{"ca", "uid"}
+  log.Println(reflect.TypeOf(i))
+  m := i.(bson.M)
+  ret := []string{}
+  for k, _ := range m {
+    ret = append(ret, k)
+  }
+  sort.Strings(ret)
   return ret
 }
 func (q *Query) Run(db *mgo.Database) error {

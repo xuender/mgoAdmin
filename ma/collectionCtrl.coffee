@@ -12,16 +12,34 @@ CollectionCtrl = ($scope, $log, $http, $modal, $routeParams, ngTableParams, $fil
   $scope.names = []
   $scope.$watch('names', (n, o)->
     $log.debug n
+    $log.debug $scope.$$childHead.$columns
+    ret = (i)->
+      m = n[i]
+      ->
+        m
     $scope.$$childHead.$columns = []
-    i = 0
-    for na in n
+    for i in [0..n.length-1]
       $scope.$$childHead.$columns.push(
-        title: ->
-          na
-        sortable: ->
-          na
-        id: i++
+        id: i
+        filter: ->
+          False
+        title: ret(i)
+        sortable: ret(i)
+        show: ->
+          true
       )
+    $scope.$$childHead.$columns.push(
+      id: n.length
+      filter: ->
+        False
+      title: ->
+        ''
+      sortable: ->
+        ''
+      show: ->
+        true
+    )
+    $log.debug $scope.$$childHead.$columns
   ,true)
   $scope.edit = (data)->
     i = $modal.open(
@@ -49,12 +67,17 @@ CollectionCtrl = ($scope, $log, $http, $modal, $routeParams, ngTableParams, $fil
     ,->
       $log.debug 'cancel'
     )
+  $scope.show = (d)->
+    if angular.isObject(d) and not angular.isArray(d)
+      return 'object'
+    if angular.isArray(d)
+      return 'array'
+    d
   $scope.tableParams = new ngTableParams(
     page: 1
     count: 10
   ,
     getData: ($defer, params)->
-      # 过滤
       $http.post('/collection',
         db: $scope.db
         collection: $scope.collection

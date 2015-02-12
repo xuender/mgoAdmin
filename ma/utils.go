@@ -4,7 +4,6 @@ import (
 	"reflect"
 )
 
-// 删除Slice元素
 func SliceRemove(slice, element interface{}) {
 	sv := reflect.ValueOf(slice).Elem()
 	for i := 0; i < sv.Len(); i++ {
@@ -17,3 +16,4 @@ func SliceRemove(slice, element interface{}) {
 		}
 	}
 }
+

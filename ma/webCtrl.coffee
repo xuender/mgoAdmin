@@ -17,20 +17,17 @@ WebCtrl = ($scope, $log, $http, $modal, lss)->
       $scope.isLogin = true
       $scope.user = user
     ,->
-      $log.info '取消'
+      $log.info 'close'
     )
   $scope.alerts = []
   $scope.alert = (msg)->
-    # 提示信息
     $scope.alerts.push(
       msg: msg
       type: 'success'
     )
   $scope.closeAlert = (index)->
-    # 关闭
     $scope.alerts.splice(index, 1)
   $scope.confirm = (msg, oFunc, cFunc=null)->
-    # 询问
     i = $modal.open(
       templateUrl: '/partials/confirm.html?v=2'
       controller: 'ConfirmCtrl'
@@ -42,7 +39,6 @@ WebCtrl = ($scope, $log, $http, $modal, lss)->
           msg
     )
     i.result.then((ok)->
-      $log.debug '增加'
       $log.info ok
       oFunc()
     ,->

@@ -15,7 +15,7 @@ angular.module('ma', [
       templateUrl: 'partials/about.html'
       controller: 'AboutCtrl'
     ).when('/collection/:db/:collection',
-      templateUrl: 'partials/collection.html'
+      templateUrl: 'partials/collection.html?1'
       controller: 'CollectionCtrl'
     ).otherwise({
       redirectTo: '/about'

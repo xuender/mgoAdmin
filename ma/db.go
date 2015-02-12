@@ -10,12 +10,11 @@ import (
 
 var dbSession *mgo.Session
 
-// 打开数据库
 func DbOpen(ip string) (err error) {
 	dbSession, err = mgo.Dial(ip)
 	if err != nil {
-		log.Fatal("数据库连接失败")
-		panic("数据库连接失败")
+		log.Fatal("Database connection failed.")
+		panic("Database connection failed.")
 	}
 	dbSession.SetMode(mgo.Monotonic, true)
 	return

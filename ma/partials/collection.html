@@ -6,9 +6,9 @@ collection: {{ collection }}
   class="table table-hover table-condensed">
   <tr ng-repeat="d in $data">
     <td ng-repeat="n in names">
-      {{ d[n] }}
+      {{ show(d[n]) }}
     </td>
-    <td>
+    <td data-title="'edit'">
       <button class="btn btn-xs" ng-click="edit(d)">
         <i class="fa fa-pencil-square-o"></i>
       </button>

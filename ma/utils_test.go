@@ -1,37 +1,29 @@
 package ma
 
 import (
-	"testing"
+  "testing"
+  . "github.com/smartystreets/goconvey/convey"
 )
 
 func TestSliceRemove(t *testing.T) {
-	s := []string{"1", "2", "4", "5"}
-	SliceRemove(&s, "4")
-	if len(s) != 3 {
-		t.Errorf("删除错误剩余:%d", len(s))
-	}
-	if s[2] != "5" {
-		t.Errorf("最后数据:%s", s[2])
-	}
-	SliceRemove(&s, "1")
-	if len(s) != 2 {
-		t.Errorf("删除错误剩余:%d", len(s))
-	}
-	if s[1] != "5" {
-		t.Errorf("最后数据:%s", s[1])
-	}
-	SliceRemove(&s, "5")
-	if len(s) != 1 {
-		t.Errorf("删除错误剩余:%d", len(s))
-	}
-	if s[0] != "2" {
-		t.Errorf("最后数据:%s", s[0])
-	}
-	SliceRemove(&s, "533")
-	if len(s) != 1 {
-		t.Errorf("删除错误剩余:%d", len(s))
-	}
-	if s[0] != "2" {
-		t.Errorf("最后数据:%s", s[0])
-	}
+  Convey("Slice Remove", t, func() {
+    s := []string{"1", "2", "4", "5"}
+    Convey("remove", func(){
+      SliceRemove(&s, "4")
+      So(len(s), ShouldEqual, 3)
+      So(s[2], ShouldEqual, "5")
+      SliceRemove(&s, "1")
+      So(len(s), ShouldEqual, 2)
+      So(s[1], ShouldEqual, "5")
+      SliceRemove(&s, "5")
+      So(len(s), ShouldEqual, 1)
+      So(s[0], ShouldEqual, "2")
+    })
+    Convey("remove error", func(){
+      SliceRemove(&s, "533")
+      So(len(s), ShouldEqual, 4)
+      So(s[3], ShouldEqual, "5")
+    })
+  })
 }
+
