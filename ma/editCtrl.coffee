@@ -10,6 +10,8 @@ EditCtrl= ($scope, $log, $modal, $modalInstance, data)->
   $scope.$watch('data', (n, o)->
     $log.debug 'watch', n
   )
+  $scope.readOnly = (d)->
+    '_id' not of d
   $scope.isObj = (d)->
     angular.isObject(d) and not angular.isArray(d)
   $scope.isArray = (d)->

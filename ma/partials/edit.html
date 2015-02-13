@@ -7,7 +7,8 @@
       <label class="control-label col-xs-3">{{ k }}</label>
       <div class="col-xs-8">
         <input type="text" class="form-control"
-        ng-hide="isObj(v) || isArray(v)" ng-model="data[k]"/>
+        ng-hide="isObj(v) || isArray(v)" ng-model="data[k]"
+        ng-readonly="readOnly(data)"/>
         <button ng-show="isObj(v) || isArray(v)" ng-click="edit(k, v)">
           <i class="fa fa-pencil-square-o"></i>
         </button>
