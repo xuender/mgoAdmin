@@ -24,6 +24,7 @@ _testmain.go
 *.prof
 
 *.log
+*.vim
 public/
 node_modules/
 bower_components/
